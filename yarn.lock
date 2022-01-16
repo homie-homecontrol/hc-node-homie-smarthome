@@ -1583,10 +1583,10 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
-node-homie@~0.9.23:
-  version "0.9.23"
-  resolved "https://registry.yarnpkg.com/node-homie/-/node-homie-0.9.23.tgz#2398b2aeaf548a0deb6c995eab8ede26dfc2b930"
-  integrity sha512-3XPXdyd4ra8VY1+VRjlZuVI3djFg/5pEPv1aGT/heCXMfJ1JGgWAhuC+X024ErJAMaMJnUig0Uqazj8c6fWHvw==
+node-homie@~0.9.24:
+  version "0.9.24"
+  resolved "https://registry.yarnpkg.com/node-homie/-/node-homie-0.9.24.tgz#29c614f42df8853e32716544d670b8d236f15464"
+  integrity sha512-SlteHox7l8JCGBjeQ6xbsE4aWgf9CTgEWQ/PkXltmDVVpgwd8WxiZUtdbfliobvSX3nAT/trGYAsprQtUi5/mg==
   dependencies:
     mqtt "~4.2.8"
     rxjs "~7.4"
