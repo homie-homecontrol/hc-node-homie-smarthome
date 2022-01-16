@@ -63,20 +63,18 @@ export class DimmerNode extends BaseSmarthomeNode<DimmerNodePropertyConfig> {
             settable: this.propConfig.settable === true,
         }, getPropertyOptions(propConfig)));
 
-        this.propBrighter.onSetMessage$.pipe(
-            takeUntil(this.onDestroy$),
-            tap(event => {
+        this.propBrighter.onSetMessage$.pipe(takeUntil(this.onDestroy$)).subscribe({
+            next: event => {
                 const newVal = this.brightness + this.propConfig.step;
                 this.propBrightness.onSetMessage(String(Math.min(newVal, 100)));
-            })
-        ).subscribe();
+            }
+        });
 
-        this.propDarker.onSetMessage$.pipe(
-            takeUntil(this.onDestroy$),
-            tap(event => {
+        this.propDarker.onSetMessage$.pipe(takeUntil(this.onDestroy$)).subscribe({
+            next: event => {
                 const newVal = this.brightness - this.propConfig.step;
                 this.propBrightness.onSetMessage(String(Math.max(newVal, this.propConfig.stepToZero ? 0 : 1)));
-            })
-        ).subscribe();
+            }
+        });
     }
 }

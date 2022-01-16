@@ -54,12 +54,11 @@ export class SwitchNode extends BaseSmarthomeNode<SwitchNodePropertyConfig> {
             settable: this.propConfig.settable === true,
         }, getPropertyOptions(propConfig)));
 
-        this.propToggle.onSetMessage$.pipe(
-            takeUntil(this.onDestroy$),
-            tap(event => {
+        this.propToggle.onSetMessage$.pipe(takeUntil(this.onDestroy$)).subscribe({
+            next: event => {
                 this.propState.onSetMessage(String(!this.state));
-            })
-        ).subscribe();
+            }
+        });
 
     }
 }
