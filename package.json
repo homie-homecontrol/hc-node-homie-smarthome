@@ -1,11 +1,14 @@
 {
-  "name": "hc-node-homie-smarthome",
+  "name": "@homie-homecontrol/hc-node-homie-smarthome",
   "version": "0.4.0",
   "description": "Smartome extension for homie-homecontrol based on the node-homie library",
   "main": "./lib/cjs/index.js",
   "module": "./lib/es6/index.js",
   "es2015": "../lib/esm/index.js",
   "types": "index.d.ts",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "typesVersions": {
     ">=4.2": {
       "*": [
