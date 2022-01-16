@@ -1,0 +1,81 @@
+{
+  "name": "hc-node-homie-smarthome",
+  "version": "0.4.0",
+  "description": "Smartome extension for homie-homecontrol based on the node-homie library",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/es6/index.js",
+  "es2015": "../lib/esm/index.js",
+  "types": "index.d.ts",
+  "typesVersions": {
+    ">=4.2": {
+      "*": [
+        "lib/types/*"
+      ]
+    }
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "build": "gulp prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/homie-homecontrol/hc-node-homie-smarthome.git"
+  },
+  "homepage": "https://github.com/homie-homecontrol/hc-node-homie-smarthome.git#README.md",
+  "files": [
+    "lib",
+    "src",
+    "model",
+    "util",
+    "package.json",
+    "tsconfig.json",
+    "tsconfig.cjs.json",
+    "tsconfig.es6.json",
+    "tsconfig.esm.json",
+    "tsconfig.types.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "node": "./lib/cjs/index.js",
+      "es": "./lib/es6/index.js",
+      "default": "./lib/esm/index.js"
+    },
+    "./model": {
+      "node": "./lib/cjs/model/index.js",
+      "es2015": "./lib/es6/model/index.js",
+      "default": "./lib/esm/model/index.js"
+    },
+    "./util": {
+      "node": "./lib/cjs/util/index.js",
+      "es2015": "./lib/es6/util/index.js",
+      "default": "./lib/esm/util/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "homie",
+    "node-homie",
+    "homie-homecontrol",
+    "smarthome"
+  ],
+  "author": {
+    "name": "schaze",
+    "email": "schazet@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.0",
+    "@types/node": "^14.17",
+    "gulp": "~4.0.2",
+    "gulp-sourcemaps": "~3.0.0",
+    "gulp-typescript": "~5.0.1",
+    "merge2": "~1.4.1",
+    "typescript": "~4.4.4"
+  },
+  "dependencies": {
+    "node-homie": "~0.9.23",
+    "rxjs": "~7.4"
+  }
+}
