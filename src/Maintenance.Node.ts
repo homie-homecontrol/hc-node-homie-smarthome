@@ -66,41 +66,41 @@ export class MaintenanceNode extends BaseSmarthomeNode<MaintenanceNodePropertyCo
         );
 
         if (this.propConfig.lowBattery) {
-            this.propLowBattery = this.add(new HomieProperty(this, {
+            this.propLowBattery = this.makeProperty({
                 id: 'low-battery',
                 name: 'Low battery indicator',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: this.propConfig.settable === true,
-            }, getPropertyOptions(propConfig)));
+                settable: false,
+            });
         }
         if (this.propConfig.batteryLevel) {
-            this.propBatteryLevel = this.add(new HomieProperty(this, {
+            this.propBatteryLevel = this.makeProperty({
                 id: 'battery-level',
                 name: 'Battery level',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: '%'
-            }, getPropertyOptions(propConfig)));
+            });
         }
         if (this.propConfig.lastUpdate) {
-            this.propLastUpdate = this.add(new HomieProperty(this, {
+            this.propLastUpdate = this.makeProperty({
                 id: 'last-update',
                 name: 'Datetime of last received update from device',
                 datatype: HOMIE_TYPE_DATETIME,
                 retained: true,
-                settable: this.propConfig.settable === true,
-            }, getPropertyOptions(propConfig)));
+                settable: false,
+            });
         }
         if (this.propConfig.reachable) {
-            this.propReachable = this.add(new HomieProperty(this, {
+            this.propReachable = this.makeProperty({
                 id: 'reachable',
                 name: 'Reachable',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: this.propConfig.settable === true,
-            }, getPropertyOptions(propConfig)));
+                settable: false,
+            });
         }
 
     }

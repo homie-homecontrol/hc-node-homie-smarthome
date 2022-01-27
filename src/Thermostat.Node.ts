@@ -80,57 +80,57 @@ export class ThermostatNode extends BaseSmarthomeNode<ThermostatNodePropertyConf
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propSetTemperature = this.add(new HomieProperty(this, {
+        this.propSetTemperature = this.makeProperty({
             id: 'set-temperature',
             name: 'Target temperature',
             datatype: HOMIE_TYPE_FLOAT,
             retained: true,
-            settable: checkSettable(this.propConfig.settable, 'set-temperature'),
+            settable: true,
             unit: `°${this.propConfig.tempUnit}`
-        }, getPropertyOptions(propConfig)));
+        });
 
 
         if (this.propConfig.valve) {
-            this.propValve =this.add( new HomieProperty(this, {
+            this.propValve =this.makeProperty({
                 id: 'valve',
                 name: 'Valve opening',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'valve'),
+                settable: false,
                 unit: "%"
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
         if (this.propConfig.mode) {
-            this.propMode = this.add(new HomieProperty(this, {
+            this.propMode = this.makeProperty({
                 id: 'mode',
                 name: 'Heating/Cooling mode',
                 datatype: HOMIE_TYPE_ENUM,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'mode'),
+                settable: true,
                 format: this.propConfig.modes.join(',')
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
         if (this.propConfig.windowopen) {
-            this.propWindowopen = this.add(new HomieProperty(this, {
+            this.propWindowopen = this.makeProperty( {
                 id: 'windowopen',
                 name: 'Window open state',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'windowopen'),
-            }, getPropertyOptions(propConfig)))
+                settable: false,
+            })
         }
 
         if (this.propConfig.boost_state) {
-            this.propBoostState = this.add(new HomieProperty(this, {
+            this.propBoostState = this.makeProperty( {
                 id: 'boost-state',
                 name: 'Seconds remain for boost',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'boost-state'),
+                settable: false,
                 unit: "min"
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
     }

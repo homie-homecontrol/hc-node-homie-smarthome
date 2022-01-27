@@ -1,27 +1,23 @@
-import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_INT, HomieNodeAtrributes, HOMIE_TYPE_BOOL } from "node-homie/model";
+import { HomieDevice, HomieProperty } from "node-homie";
+import { HOMIE_TYPE_INT, HomieNodeAtrributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
 import { H_SMARTHOME_TYPE_SHUTTER, ShutterNodePropertyConfig } from "./model/Smarthome.model";
-import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
+import { takeUntil } from "rxjs";
 
-const DEFAULT_OPTIONS: ShutterNodePropertyConfig = { canStop: true, settable: true };
+const DEFAULT_OPTIONS = <ShutterNodePropertyConfig>{ canStop: true, settable: true, implementUpDown: true };
 
 
 export class ShutterNode extends BaseSmarthomeNode<ShutterNodePropertyConfig> {
 
 
     public readonly propPosition: HomieProperty;
-    public readonly propUp: HomieProperty;
-    public readonly propDown: HomieProperty;
-    public readonly propStop?: HomieProperty;
+    public readonly propAction: HomieProperty;
 
     public set position(value: number) {
-        // if (!this.propState.lowBattery) { return; }
         this.propPosition.value = String(value);
 
     }
     public get position(): number {
-        // if (!this.propState.lowBattery) { return undefined; }
         return this.propPosition.value ? parseInt(this.propPosition.value) : 0;
     }
 
@@ -37,40 +33,48 @@ export class ShutterNode extends BaseSmarthomeNode<ShutterNodePropertyConfig> {
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propPosition = this.add(new HomieProperty(this, {
+        this.propPosition = this.makeProperty({
             id: 'position',
             name: 'Shutter position',
             datatype: HOMIE_TYPE_INT,
             retained: true,
-            settable: this.propConfig.settable === true,
+            settable: true,
             unit: '%'
-        }, getPropertyOptions(propConfig)));
+        });
 
-        this.propUp = this.add(new HomieProperty(this, {
-            id: 'up',
-            name: 'Scroll shutter up',
-            datatype: HOMIE_TYPE_BOOL,
-            retained: false,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
-
-        this.propDown = this.add(new HomieProperty(this, {
-            id: 'down',
-            name: 'Scroll shutter down',
-            datatype: HOMIE_TYPE_BOOL,
-            retained: false,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
-
-        if (this.propConfig.canStop) {
-            this.propStop = this.add(new HomieProperty(this, {
-                id: 'stop',
-                name: 'Stop shutter movement',
-                datatype: HOMIE_TYPE_BOOL,
-                retained: false,
-                settable: this.propConfig.settable === true,
-            }, getPropertyOptions(propConfig)));
+        const actions = ['up', 'down'];
+        if (this.propConfig.canStop){
+            actions.push('stop')
         }
 
+        this.propAction = this.makeProperty({
+            id: 'action',
+            name: 'control shutter action',
+            datatype: HOMIE_TYPE_ENUM,
+            retained: false,
+            settable: true,
+            format: actions.join(',')
+        });
+
+       if (this.propConfig.implementUpDown){
+           this.propAction.onSetMessage$.pipe(takeUntil(this.onDestroy$)).subscribe({
+            next: event => {
+                if (event.valueStr === 'up') {
+                    this.up();
+                } else if (event.valueStr === 'down') {
+                    this.down();
+                }
+            }
+        });
+       }
+
+    }
+
+    public up() {
+        this.propPosition.onSetMessage(String(0));
+    }
+
+    public down() {
+        this.propPosition.onSetMessage(String(100));
     }
 }

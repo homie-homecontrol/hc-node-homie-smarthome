@@ -8,8 +8,8 @@ export function getPropertyOptions(config: PropertyOptsNodePropertyConfig): Homi
     }
 }
 
-export function checkSettable(settable: boolean | SetableProps | undefined | null, attr: keyof SetableProps, defaultState: boolean = false): boolean {
+export function checkSettable<PROPIDS extends string = string>(settable: boolean | SetableProps<PROPIDS> | undefined | null, attr: keyof SetableProps<PROPIDS>, defaultState: boolean = false): boolean {
+    if (settable === true || settable === false) { return settable; }
     if (settable === undefined || settable === null || !Object.prototype.hasOwnProperty.call(settable, attr) ) { return defaultState; }
-    if (settable === true || settable == false) { return settable; }
-    return settable[attr];
+    return settable[attr]!;
 }

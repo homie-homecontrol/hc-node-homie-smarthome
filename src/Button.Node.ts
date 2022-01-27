@@ -1,7 +1,7 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
 import { HOMIE_TYPE_ENUM, HomieNodeAtrributes } from "node-homie/model";
-import { ButtonNodePropertyConfig, ButtonState, H_SMARTHOME_TYPE_BUTTON } from "./model/Smarthome.model";
-import { getPropertyOptions } from "./util/smarthome.func";
+import { ButtonNodePropertyConfig, ButtonState, H_SMARTHOME_TYPE_BUTTON, SmarthomeTypeButtonProps } from "./model/Smarthome.model";
+import { checkSettable, getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
 const DEFAULT_OPTIONS: ButtonNodePropertyConfig = { buttonStates: ['press', 'long-press'], settable: false };
@@ -33,16 +33,17 @@ export class ButtonNode extends BaseSmarthomeNode<ButtonNodePropertyConfig> {
             },
             ...attrs
         },
-        { ...DEFAULT_OPTIONS, ...propConfig });
+            { ...DEFAULT_OPTIONS, ...propConfig });
 
-        this.propAction = this.add(new HomieProperty(this, {
+
+        this.propAction = this.makeProperty({
             id: 'action',
             name: 'Button action event',
             datatype: HOMIE_TYPE_ENUM,
             retained: false,
-            settable: this.propConfig.settable === true,
+            settable: false,
             format: this.propConfig.buttonStates.join(',')
-        }, getPropertyOptions(propConfig)));
+        });
 
     }
 }

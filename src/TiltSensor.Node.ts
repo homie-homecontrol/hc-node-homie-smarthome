@@ -30,13 +30,13 @@ export class TiltSensorNode extends BaseSmarthomeNode<TiltSensorNodePropertyConf
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propState = this.add(new HomieProperty(this, {
+        this.propState = this.makeProperty({
             id: 'state',
             name: 'Tilted/Not Tilted state',
             datatype: HOMIE_TYPE_BOOL,
             retained: true,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
+            settable: false,
+        });
 
 
     }

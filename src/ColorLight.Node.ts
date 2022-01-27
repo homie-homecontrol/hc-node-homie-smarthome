@@ -1,8 +1,7 @@
-import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
+import { HomieDevice, HomieProperty } from "node-homie";
 import { HomieRGBColor, HOMIE_TYPE_COLOR, HOMIE_TYPE_INT, HomieNodeAtrributes, HomieHSVColor, isHomieRGBColor } from "node-homie/model";
 import { hsvColorToString, parseHSVColor, parseRGBColor, rgbColorToString } from "node-homie/util";
 import { ColorLightNodePropertyConfig, H_SMARTHOME_TYPE_COLORLIGHT } from "./model/Smarthome.model";
-import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
 
@@ -12,7 +11,6 @@ export class ColorLightNode extends BaseSmarthomeNode<ColorLightNodePropertyConf
 
     public readonly propColor: HomieProperty;
     public readonly propColorTemperature: HomieProperty;
-    // public readonly propPressure?: HomieProperty;
 
 
     public set color(value: HomieRGBColor | HomieHSVColor) {
@@ -44,24 +42,24 @@ export class ColorLightNode extends BaseSmarthomeNode<ColorLightNodePropertyConf
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propColor = this.add(new HomieProperty(this, {
+        this.propColor = this.makeProperty({
             id: 'color',
             name: 'Color',
             datatype: HOMIE_TYPE_COLOR,
             retained: true,
-            settable: this.propConfig.settable === true,
+            settable: true,
             format: this.propConfig.colorMode
-        }, getPropertyOptions(propConfig)));
+        });
 
-        this.propColorTemperature = this.add(new HomieProperty(this, {
+        this.propColorTemperature = this.makeProperty({
             id: 'color-temperature',
             name: 'Color Temperature',
             datatype: HOMIE_TYPE_INT,
             retained: true,
-            settable: this.propConfig.settable === true,
+            settable:  true,
             unit: "Mired",
             format: `${this.propConfig.ctmin}:${this.propConfig.ctmax}`
-        }, getPropertyOptions(propConfig)));
+        });
 
     }
 

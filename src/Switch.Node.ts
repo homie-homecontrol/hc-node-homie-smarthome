@@ -1,7 +1,7 @@
 import { type } from "os";
 import { pairwise, takeUntil, tap } from "rxjs/operators";
 import { HomieDevice, HomieNode, HomieProperty, } from "node-homie";
-import { HomieNodeAtrributes, HOMIE_TYPE_BOOL } from "node-homie/model";
+import { HomieNodeAtrributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
 import { SwitchNodePropertyConfig, H_SMARTHOME_TYPE_SWITCH } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -14,7 +14,7 @@ export class SwitchNode extends BaseSmarthomeNode<SwitchNodePropertyConfig> {
 
 
     public readonly propState: HomieProperty;
-    public readonly propToggle: HomieProperty;
+    public readonly propAction: HomieProperty;
 
     public set state(value: boolean) {
         // if (!this.propState.lowBattery) { return; }
@@ -38,27 +38,34 @@ export class SwitchNode extends BaseSmarthomeNode<SwitchNodePropertyConfig> {
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propState = this.add(new HomieProperty(this, {
+        this.propState = this.makeProperty({
             id: 'state',
             name: 'On/Off state',
             datatype: HOMIE_TYPE_BOOL,
             retained: true,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
+            settable: true,
+        });
 
-        this.propToggle = this.add(new HomieProperty(this, {
-            id: 'toggle',
-            name: 'Toggle On/Off state',
-            datatype: HOMIE_TYPE_BOOL,
+        this.propAction = this.makeProperty({
+            id: 'action',
+            name: 'Change state',
+            datatype: HOMIE_TYPE_ENUM,
             retained: false,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
+            settable: true,
+            format: 'toggle'
+        });
 
-        this.propToggle.onSetMessage$.pipe(takeUntil(this.onDestroy$)).subscribe({
+        this.propAction.onSetMessage$.pipe(takeUntil(this.onDestroy$)).subscribe({
             next: event => {
-                this.propState.onSetMessage(String(!this.state));
+                if (event.valueStr === 'toggle') {
+                    this.toogle();
+                }
             }
         });
 
+    }
+
+    public toogle(){
+        this.propState.onSetMessage(String(!this.state));
     }
 }

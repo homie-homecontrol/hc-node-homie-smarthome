@@ -54,35 +54,35 @@ export class MotionSensorNode extends BaseSmarthomeNode<MotionSensorhNodePropert
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propMotion = this.add(new HomieProperty(this, {
+        this.propMotion = this.makeProperty({
             id: 'motion',
             name: 'Motion detected',
             datatype: HOMIE_TYPE_BOOL,
             retained: true,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
+            settable: false,
+        });
 
         if (this.propConfig.noMotion) {
-            this.propNoMotion = this.add(new HomieProperty(this, {
+            this.propNoMotion = this.makeProperty( {
                 id: 'no-motion',
                 name: 'No motion detected since',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: "s"
-            }, getPropertyOptions(propConfig)));
+            });
             this.noMotion = 0;
         }
 
         if (this.propConfig.lux) {
-            this.propLux = this.add(new HomieProperty(this, {
+            this.propLux = this.makeProperty( {
                 id: 'lux',
                 name: 'Current lightlevel',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: "lx"
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
     }

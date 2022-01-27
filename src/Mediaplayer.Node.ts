@@ -2,7 +2,6 @@ import { HomieDevice, HomieProperty } from "node-homie";
 import { HOMIE_TYPE_FLOAT, HomieNodeAtrributes, HOMIE_TYPE_ENUM, HOMIE_TYPE_INT, HOMIE_TYPE_STRING, HOMIE_TYPE_BOOL } from "node-homie/model";
 import { MediaplayerPropertyConfig, PlayerActions, H_SMARTHOME_TYPE_MEDIAPLAYER } from "./model/Smarthome.model";
 import { stringToBool } from "node-homie/util";
-import { checkSettable, getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
 
@@ -20,6 +19,35 @@ const DEFAULT_OPTIONS: MediaplayerPropertyConfig = {
     shuffle: false,
     trackInfo: false
 }
+
+/**
+ *  TODO: This should be split up in 3 nodes:
+ * 
+    player-control:
+        next: true,
+        previous: true,
+        forward: true,
+        rewind: true,
+        stop:true,
+        position: true,
+        duration <---- duration info will be available twice when media-info node is present
+        repeat: false,
+        shuffle: false,
+
+        --> this could also include a playrequest property which accepts specific URIs to be played
+
+    volume-control:
+        volume: true,
+        mute: true,
+
+    media-info:
+        title,
+        artist,
+        album,
+        mediaUrl: true,
+        duration
+ */
+
 
 export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig> {
 
@@ -187,126 +215,126 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         })
 
 
-        this.propPlayerAction = this.add(new HomieProperty(this, {
+        this.propPlayerAction = this.makeProperty({
             id: 'player-action',
             name: 'Player action',
             datatype: HOMIE_TYPE_ENUM,
             retained: false,
-            settable: checkSettable(this.propConfig.settable, 'player-action', true),
+            settable: true,
             format: this.playerActions!.join(",")
-        }, getPropertyOptions(propConfig)));
+        });
 
 
         if (propConfig.position) {
-            this.propPosition = this.add(new HomieProperty(this, {
+            this.propPosition = this.makeProperty({
                 id: 'position',
                 name: 'Position',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'position'),
+                settable: false,
                 unit: `s`
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
 
 
         if (propConfig.volume) {
-            this.propVolume = this.add(new HomieProperty(this, {
+            this.propVolume = this.makeProperty({
                 id: 'volume',
                 name: 'Volume',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'volume', true),
+                settable: true,
                 unit: `%`
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
 
         if (propConfig.mediaUrl) {
-            this.propMediaUrl = this.add(new HomieProperty(this, {
+            this.propMediaUrl = this.makeProperty({
                 id: 'media-url',
                 name: 'Media url',
                 datatype: HOMIE_TYPE_STRING,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'media-url')
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
         }
 
-        this.propPlayState = this.add(new HomieProperty(this, {
+        this.propPlayState = this.makeProperty( {
             id: 'play-state',
             name: 'Play state',
             datatype: HOMIE_TYPE_ENUM,
             retained: true,
-            settable: checkSettable(this.propConfig.settable, 'play-state', true),
+            settable: false,
             format: ['playing', 'paused', 'stopped'].join(",")
-        }, getPropertyOptions(propConfig)));
+        });
 
 
         if (propConfig.mute) {
-            this.propMute = this.add(new HomieProperty(this, {
+            this.propMute = this.makeProperty({
                 id: 'mute',
                 name: 'Mute volume',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'mute', true)
-            }, getPropertyOptions(propConfig)));
+                settable: true
+            });
         }
 
 
         if (propConfig.shuffle) {
-            this.propShuffle = this.add(new HomieProperty(this, {
+            this.propShuffle = this.makeProperty({
                 id: 'shuffle',
                 name: 'Shuffle playlist',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'shuffle')
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
         }
 
         if (propConfig.repeat) {
-            this.propRepeat = this.add(new HomieProperty(this, {
+            this.propRepeat = this.makeProperty( {
                 id: 'repeat',
                 name: 'Repeat playlist',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'repeat')
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
         }
 
         if (propConfig.trackInfo){
 
-            this.propTitle = this.add(new HomieProperty(this, {
+            this.propTitle = this.makeProperty({
                 id: 'title',
                 name: 'Track title',
                 datatype: HOMIE_TYPE_STRING,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'title')
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
 
-            this.propArtist = this.add(new HomieProperty(this, {
+            this.propArtist = this.makeProperty({
                 id: 'artist',
                 name: 'Track artist',
                 datatype: HOMIE_TYPE_STRING,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'artist')
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
 
-            this.propAlbum = this.add(new HomieProperty(this, {
+            this.propAlbum = this.makeProperty( {
                 id: 'album',
                 name: 'Track album',
                 datatype: HOMIE_TYPE_STRING,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'album')
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
 
-            this.propDuration = this.add(new HomieProperty(this, {
+            this.propDuration = this.makeProperty( {
                 id: 'duration',
                 name: 'Track duration',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: checkSettable(this.propConfig.settable, 'album'),
+                settable: false,
                 unit: 's'
-            }, getPropertyOptions(propConfig)));
+            });
 
 
         }

@@ -30,13 +30,13 @@ export class TextNode extends BaseSmarthomeNode<TextNodePropertyConfig> {
             { ...DEFAULT_OPTIONS, ...propConfig }
         );
 
-        this.propText = this.add(new HomieProperty(this, {
+        this.propText = this.makeProperty({
             id: 'text',
             name: 'text',
             datatype: HOMIE_TYPE_STRING,
             retained: true,
-            settable: this.propConfig.settable === true,
-        }, getPropertyOptions(propConfig)));
+            settable: true,
+        });
 
 
 

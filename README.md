@@ -96,13 +96,10 @@ The following sections describe the available nodes and their specifics.
 |id|type|settable (defualt)|retained|unit|format|comment
 |-|-|-|-|-|-|-|
 |state|`boolean`|yes|yes|-|-|`true` = ON, `false` = OFF
-|toggle|`boolean`|yes|no|-|-| see specifics
+|action|`enum`|yes|no|-|`toggle`| 
 
 ### Configuration
 * common config options available
-
-### Specifics
-When toggle receives a `true` or `false` value it will send a command to `state` with it's negated value.
 
 ## Contact
 `type`: "homie-homecontrol/v1/type=contact"

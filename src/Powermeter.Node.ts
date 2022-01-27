@@ -74,55 +74,55 @@ export class PowermeterNode extends BaseSmarthomeNode<PowermeterNodePropertyConf
         );
 
         if (propConfig.current) {
-            this.propCurrent = this.add(new HomieProperty(this, {
+            this.propCurrent = this.makeProperty({
                 id: 'current',
                 name: 'Current',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: `mA`
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
         if (propConfig.energy_counter) {
-            this.propEnergyCounter = this.add(new HomieProperty(this, {
+            this.propEnergyCounter = this.makeProperty( {
                 id: 'energy-counter',
                 name: 'Energy counter',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: `Wh`
-            }, getPropertyOptions(propConfig)));
+            });
         }
         if (propConfig.frequency) {
-            this.propFrequency = this.add(new HomieProperty(this, {
+            this.propFrequency = this.makeProperty( {
                 id: 'frequency',
                 name: 'Frequency',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: `Hz`
-            }, getPropertyOptions(propConfig)));
+            });
         }
         if (propConfig.power) {
-            this.propPower = this.add(new HomieProperty(this, {
+            this.propPower = this.makeProperty( {
                 id: 'power',
                 name: 'Power',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: `W`
-            }, getPropertyOptions(propConfig)));
+            });
         }
         if (propConfig.voltage) {
-            this.propVoltage = this.add(new HomieProperty(this, {
+            this.propVoltage = this.makeProperty({
                 id: 'voltage',
                 name: 'Voltage',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: `V`
-            }, getPropertyOptions(propConfig)));
+            });
         }
 
 

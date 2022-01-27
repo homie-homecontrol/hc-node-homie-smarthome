@@ -60,34 +60,34 @@ export class WeatherNode extends BaseSmarthomeNode<WeatherhNodePropertyConfig> {
         { ...DEFAULT_OPTIONS, ...propConfig });
 
         if (this.propConfig.temperature) {
-            this.propTemperature = this.add(new HomieProperty(this, {
+            this.propTemperature = this.makeProperty({
                 id: 'temperature',
                 name: 'Current temperature',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: `°${this.propConfig.tempUnit}`
-            }, getPropertyOptions(propConfig)));
+            });
         }
         if (this.propConfig.humidity) {
-            this.propHumidity = this.add(new HomieProperty(this, {
+            this.propHumidity = this.makeProperty( {
                 id: 'humidity',
                 name: 'Current humidity',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: "%"
-            }, getPropertyOptions(propConfig)));
+            });
         }
         if (this.propConfig.pressure) {
-            this.propPressure = this.add(new HomieProperty(this, {
+            this.propPressure = this.makeProperty( {
                 id: 'pressure',
                 name: 'Current pressure',
                 datatype: HOMIE_TYPE_FLOAT,
                 retained: true,
-                settable: this.propConfig.settable === true,
+                settable: false,
                 unit: "kPa"
-            }, getPropertyOptions(propConfig)));
+            });
         }
     }
 

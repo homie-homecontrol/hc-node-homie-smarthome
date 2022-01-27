@@ -1,5 +1,5 @@
-import { BatteryNodePropertyConfig, H_SMARTHOME_TYPE_BATTERY } from "./model/Smarthome.model";
-import { getPropertyOptions } from "./util/smarthome.func";
+import { H_SMARTHOME_TYPE_BATTERY, BatteryNodePropertyConfig, SmarthomePropAttrs, SmarthomeTypeBatteryProps } from "./model/Smarthome.model";
+import { checkSettable, getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 import { HomieDevice, HomieProperty } from "node-homie";
 import { HomieNodeAtrributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_INT } from "node-homie/model";
@@ -45,23 +45,23 @@ export class BatteryNode extends BaseSmarthomeNode<BatteryNodePropertyConfig> {
         );
 
         if (this.propConfig.lowBattery) {
-            this.propLowBattery = this.add(new HomieProperty(this, {
+            this.propLowBattery = this.makeProperty({
                 id: 'low-battery',
                 name: 'Low battery indicator',
                 datatype: HOMIE_TYPE_BOOL,
                 retained: true,
-                settable: propConfig.settable === true,
-            }, getPropertyOptions(propConfig)));
+                settable: false
+            });
         }
         if (this.propConfig.batteryLevel) {
-            this.propBatteryLevel = this.add(new HomieProperty(this, {
+            this.propBatteryLevel = this.makeProperty({
                 id: 'battery-level',
                 name: 'Battery level',
                 datatype: HOMIE_TYPE_INT,
                 retained: true,
-                settable: propConfig.settable === true,
+                settable: false,
                 unit: '%'
-            }, getPropertyOptions(propConfig)));
+            });
         }
     }
 
