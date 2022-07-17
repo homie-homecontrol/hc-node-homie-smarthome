@@ -1,6 +1,6 @@
 {
   "name": "hc-node-homie-smarthome",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Smartome extension for homie-homecontrol based on the node-homie library",
   "main": "./lib/cjs/index.js",
   "module": "./lib/es6/index.js",
