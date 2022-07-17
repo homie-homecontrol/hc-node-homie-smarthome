@@ -1,6 +1,6 @@
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_FLOAT, HomieNodeAtrributes, HOMIE_TYPE_ENUM, HOMIE_TYPE_INT, HOMIE_TYPE_STRING, HOMIE_TYPE_BOOL } from "node-homie/model";
-import { MediaplayerPropertyConfig, PlayerActions, H_SMARTHOME_TYPE_MEDIAPLAYER, MediaPlayerControlStateFormat } from "./model/Smarthome.model";
+import { HOMIE_TYPE_FLOAT, HomieNodeAtrributes, HOMIE_TYPE_ENUM, HOMIE_TYPE_INT, HOMIE_TYPE_STRING, HOMIE_TYPE_BOOL, notNullish } from "node-homie/model";
+import { MediaplayerPropertyConfig, PlayerActions, H_SMARTHOME_TYPE_MEDIAPLAYER, MediaPlayerControlStateFormat, MediaPlayerControlState, MediaPlayerControlStates } from "./model/Smarthome.model";
 import { stringToBool } from "node-homie/util";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
@@ -26,8 +26,9 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
 
     public readonly propMediaProgress?: HomieProperty;
     public set mediaProgress(value: number) {
-        if (this.mediaProgress !== value) {
-            this.propMediaProgress!.value = String(value);
+        const newValue = String(value);
+        if (this.propMediaProgress?.value !== newValue) {
+            this.propMediaProgress!.value = newValue;
         }
     }
     public get mediaProgress(): number {
@@ -37,8 +38,9 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
 
     public readonly propMediaLength?: HomieProperty;
     public set mediaLength(value: number) {
-        if (this.mediaLength !== value) {
-            this.propMediaLength!.value = String(value);
+        const newValue = String(value);
+        if (this.propMediaLength?.value !== newValue) {
+            this.propMediaLength!.value = newValue;
         }
     }
     public get mediaLength(): number {
@@ -49,8 +51,9 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
 
     public readonly propVolume?: HomieProperty;
     public set volume(value: number) {
-        if (this.volume !== value) {
-            this.propVolume!.value = String(value);
+        const newValue = String(value);
+        if (this.propVolume?.value !== newValue) {
+            this.propVolume!.value = newValue;
         }
     }
     public get volume(): number {
@@ -79,39 +82,43 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
     }
 
     public readonly propMute?: HomieProperty;
-    public set mute(value: boolean) {
-        if (this.mute !== value) {
-            this.propMute!.value = String(value);
+    public set mute(value: MediaPlayerControlState) {
+        const newValue = String(value);
+        if (this.propMute?.value !== newValue) {
+            this.propMute!.value = newValue;
         }
     }
-    public get mute(): boolean {
-        return stringToBool(this.propMute!.value);
+    public get mute(): MediaPlayerControlState {
+        return notNullish(this.propMute!.value) ? this.propMute!.value as MediaPlayerControlState : 'disabled';
     }
 
     public readonly propShuffle?: HomieProperty;
-    public set shuffle(value: boolean) {
-        if (this.shuffle !== value) {
-            this.propShuffle!.value = String(value);
+    public set shuffle(value: MediaPlayerControlState) {
+        const newValue = String(value);
+        if (this.propShuffle?.value !== newValue) {
+            this.propShuffle!.value = newValue;
         }
     }
-    public get shuffle(): boolean {
-        return stringToBool(this.propShuffle!.value);
+    public get shuffle(): MediaPlayerControlState {
+        return notNullish(this.propShuffle!.value) ? this.propShuffle!.value as MediaPlayerControlState : 'disabled';
     }
 
     public readonly propRepeat?: HomieProperty;
-    public set repeat(value: boolean) {
-        if (this.repeat !== value) {
-            this.propRepeat!.value = String(value);
+    public set repeat(value: MediaPlayerControlState) {
+        const newValue = String(value);
+        if (this.propRepeat?.value !== newValue) {
+            this.propRepeat!.value = newValue;
         }
     }
-    public get repeat(): boolean {
-        return stringToBool(this.propRepeat!.value);
+    public get repeat(): MediaPlayerControlState {
+        return notNullish(this.propRepeat!.value) ? this.propRepeat!.value as MediaPlayerControlState : 'disabled';
     }
 
     public readonly propTitle?: HomieProperty;
     public set title(value: string) {
-        if (this.title !== value) {
-            this.propTitle!.value = value;
+        const newValue = value;
+        if (this.propTitle?.value !== newValue) {
+            this.propTitle!.value = newValue;
         }
     }
     public get title(): string {
