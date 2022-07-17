@@ -252,9 +252,14 @@ export interface TextNodePropertyConfig extends BaseNodePropertyConfig<Smarthome
 
 export const H_SMARTHOME_TYPE_MEDIAPLAYER = `${H_SMARTHOME_NS_V1}/type=mediaplayer` as const;
 
-export const H_SMARTHOME_TYPE_MEDIAPLAYER_PROPS = ['player-action', 'position', 'volume', 'media-url', 'play-state', 'mute', 'shuffle', 'repeat', 'title', 'artist', 'album', 'duration'] as const;
+export const H_SMARTHOME_TYPE_MEDIAPLAYER_PROPS = ['player-action', 'media-progress', 'media-length', 'volume', 'art-url', 'play-state', 'mute', 'shuffle', 'repeat', 'title', 'subtext1', 'subtext2'] as const;
 export type SmarthomeTypeMediaplayerProps = typeof H_SMARTHOME_TYPE_MEDIAPLAYER_PROPS[number];
 
+export const MediaPlayerControlStates = ['disabled', 'on', 'off'] as const;
+
+export type MediaPlayerControlState = typeof MediaPlayerControlStates[number];
+
+export const MediaPlayerControlStateFormat = MediaPlayerControlStates.join(',');
 
 export const PlayerActions = ['next', 'previous', 'forward', 'rewind', 'play', 'pause', 'stop'];
 
@@ -264,13 +269,13 @@ export interface MediaplayerPropertyConfig extends BaseNodePropertyConfig<Smarth
     forward: boolean,
     rewind: boolean,
     stop: boolean,
-    position: boolean,
-    mediaUrl: boolean,
-    volume: boolean,
-    mute: boolean,
-    shuffle: boolean,
-    repeat: boolean,
-    trackInfo: boolean
+    // position: boolean,
+    // mediaUrl: boolean,
+    // volume: boolean,
+    // mute: boolean,
+    // shuffle: boolean,
+    // repeat: boolean,
+    // trackInfo: boolean
 }
 
 
