@@ -16,15 +16,15 @@ const DEFAULT_OPTIONS: MediaplayerPropertyConfig = {
 
 export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig> {
 
-    protected readonly playerActions?: string[];
+    protected readonly playerActions: string[];
 
 
-    public readonly propPlayerAction?: HomieProperty;
+    public readonly propPlayerAction: HomieProperty;
     public set playerAction(value: string) {
         this.propPlayerAction!.value = value;
     }
 
-    public readonly propMediaProgress?: HomieProperty;
+    public readonly propMediaProgress: HomieProperty;
     public set mediaProgress(value: number) {
         const newValue = String(value);
         if (this.propMediaProgress?.value !== newValue) {
@@ -36,7 +36,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
     }
 
 
-    public readonly propMediaLength?: HomieProperty;
+    public readonly propMediaLength: HomieProperty;
     public set mediaLength(value: number) {
         const newValue = String(value);
         if (this.propMediaLength?.value !== newValue) {
@@ -49,7 +49,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
 
 
 
-    public readonly propVolume?: HomieProperty;
+    public readonly propVolume: HomieProperty;
     public set volume(value: number) {
         const newValue = String(value);
         if (this.propVolume?.value !== newValue) {
@@ -61,7 +61,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
     }
 
 
-    public readonly propArtUrl?: HomieProperty;
+    public readonly propArtUrl: HomieProperty;
     public set artUrl(value: string) {
         if (this.artUrl !== value) {
             this.propArtUrl!.value = value || "";
@@ -71,7 +71,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         return this.propArtUrl!.value ? this.propArtUrl!.value : "";
     }
 
-    public readonly propPlayState?: HomieProperty;
+    public readonly propPlayState: HomieProperty;
     public set playState(value: string) {
         if (this.playState !== value) {
             this.propPlayState!.value = value;
@@ -81,7 +81,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         return this.propPlayState!.value ? this.propPlayState!.value : "";
     }
 
-    public readonly propMute?: HomieProperty;
+    public readonly propMute: HomieProperty;
     public set mute(value: MediaPlayerControlState) {
         const newValue = String(value);
         if (this.propMute?.value !== newValue) {
@@ -92,7 +92,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         return notNullish(this.propMute!.value) ? this.propMute!.value as MediaPlayerControlState : 'disabled';
     }
 
-    public readonly propShuffle?: HomieProperty;
+    public readonly propShuffle: HomieProperty;
     public set shuffle(value: MediaPlayerControlState) {
         const newValue = String(value);
         if (this.propShuffle?.value !== newValue) {
@@ -103,7 +103,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         return notNullish(this.propShuffle!.value) ? this.propShuffle!.value as MediaPlayerControlState : 'disabled';
     }
 
-    public readonly propRepeat?: HomieProperty;
+    public readonly propRepeat: HomieProperty;
     public set repeat(value: MediaPlayerControlState) {
         const newValue = String(value);
         if (this.propRepeat?.value !== newValue) {
@@ -114,7 +114,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         return notNullish(this.propRepeat!.value) ? this.propRepeat!.value as MediaPlayerControlState : 'disabled';
     }
 
-    public readonly propTitle?: HomieProperty;
+    public readonly propTitle: HomieProperty;
     public set title(value: string) {
         const newValue = value;
         if (this.propTitle?.value !== newValue) {
@@ -126,7 +126,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
     }
 
 
-    public readonly propSubText1?: HomieProperty;
+    public readonly propSubText1: HomieProperty;
     public set subText1(value: string) {
         if (this.subText1 !== value) {
             this.propSubText1!.value = value || "";
@@ -136,7 +136,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
         return this.propSubText1!.value ? this.propSubText1!.value : "";
     }
 
-    public readonly propSubText2?: HomieProperty;
+    public readonly propSubText2: HomieProperty;
     public set subText2(value: string) {
         if (this.subText2 !== value) {
             this.propSubText2!.value = value || "";
@@ -272,7 +272,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
             settable: false
         });
 
-        this.propSubText1 = this.makeProperty({
+        this.propSubText2 = this.makeProperty({
             id: 'subtext2',
             name: 'Subtext 2',
             datatype: HOMIE_TYPE_STRING,
