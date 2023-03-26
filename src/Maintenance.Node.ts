@@ -1,5 +1,5 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_BOOL, HOMIE_TYPE_DATETIME, HOMIE_TYPE_INT, HomieNodeAtrributes } from "node-homie/model";
+import { HOMIE_TYPE_BOOL, HOMIE_TYPE_DATETIME, HOMIE_TYPE_INT, NodeAttributes } from "node-homie/model";
 import { MaintenanceNodePropertyConfig, H_SMARTHOME_TYPE_MAINTENANCE } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -53,7 +53,7 @@ export class MaintenanceNode extends BaseSmarthomeNode<MaintenanceNodePropertyCo
         return new Date(this.propLastUpdate!.value || 0)
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: MaintenanceNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: MaintenanceNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'maintenance',

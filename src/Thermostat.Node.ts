@@ -1,5 +1,5 @@
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM, HOMIE_TYPE_FLOAT, HOMIE_TYPE_INT, HomieNodeAtrributes } from "node-homie/model";
+import { HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM, HOMIE_TYPE_FLOAT, HOMIE_TYPE_INT, NodeAttributes } from "node-homie/model";
 import { ThermostatNodePropertyConfig, H_SMARTHOME_TYPE_THERMOSTAT, SetableProps } from "./model/Smarthome.model";
 import { checkSettable, getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -68,7 +68,7 @@ export class ThermostatNode extends BaseSmarthomeNode<ThermostatNodePropertyConf
     }
 
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: ThermostatNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: ThermostatNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'thermostat',

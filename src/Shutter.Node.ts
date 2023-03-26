@@ -1,5 +1,5 @@
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_INT, HomieNodeAtrributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
+import { HOMIE_TYPE_INT, NodeAttributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
 import { H_SMARTHOME_TYPE_SHUTTER, ShutterNodePropertyConfig } from "./model/Smarthome.model";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 import { takeUntil } from "rxjs";
@@ -21,7 +21,7 @@ export class ShutterNode extends BaseSmarthomeNode<ShutterNodePropertyConfig> {
         return this.propPosition.value ? parseInt(this.propPosition.value) : 0;
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: ShutterNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: ShutterNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'shutter',

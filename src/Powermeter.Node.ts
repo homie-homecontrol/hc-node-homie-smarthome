@@ -1,6 +1,6 @@
 import { map } from "rxjs/operators";
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_FLOAT, HomieNodeAtrributes } from "node-homie/model";
+import { HOMIE_TYPE_FLOAT, NodeAttributes } from "node-homie/model";
 import { PowermeterNodePropertyConfig, H_SMARTHOME_TYPE_POWERMETER } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -61,7 +61,7 @@ export class PowermeterNode extends BaseSmarthomeNode<PowermeterNodePropertyConf
         return this.propVoltage!.value ? parseFloat(this.propVoltage!.value) : 0;
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: PowermeterNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: PowermeterNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'powermeter',

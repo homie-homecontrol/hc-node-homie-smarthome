@@ -1,5 +1,5 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_FLOAT, HOMIE_TYPE_INT,HomieNodeAtrributes } from "node-homie/model";
+import { HOMIE_TYPE_FLOAT, HOMIE_TYPE_INT,NodeAttributes } from "node-homie/model";
 import { WeatherhNodePropertyConfig, H_SMARTHOME_TYPE_WEATHER } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -48,7 +48,7 @@ export class WeatherNode extends BaseSmarthomeNode<WeatherhNodePropertyConfig> {
     }
 
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: WeatherhNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: WeatherhNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'weather',

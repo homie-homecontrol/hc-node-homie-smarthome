@@ -1,7 +1,7 @@
 import { type } from "os";
 import { pairwise, takeUntil, tap } from "rxjs/operators";
 import { HomieDevice, HomieNode, HomieProperty, } from "node-homie";
-import { HomieNodeAtrributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
+import { NodeAttributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
 import { SwitchNodePropertyConfig, H_SMARTHOME_TYPE_SWITCH } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -26,7 +26,7 @@ export class SwitchNode extends BaseSmarthomeNode<SwitchNodePropertyConfig> {
         return this.propState.value === 'true';
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: SwitchNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: SwitchNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'switch',

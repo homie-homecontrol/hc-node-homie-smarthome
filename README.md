@@ -2,6 +2,7 @@
 
 [![works with MQTT Homie](https://homieiot.github.io/img/works-with-homie.png)](https://homieiot.github.io/)
 
+## NOTE: This is a BETA version
 
 Base library for homie homecontrol based on [node-homie](https://github.com/schaze/node-homie). This lib defines a set of standard smarthome nodes like switch, dimmer, weather sensor,...
 Using these minimalistic defaults applications can take 'assumptions' about the purpose of the properties used in these nodes. 
