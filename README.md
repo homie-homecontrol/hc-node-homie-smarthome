@@ -5,7 +5,7 @@
 Base library for homie homecontrol based on [node-homie](https://github.com/homie-homecontrol/node-homie). This lib defines a set of standard smarthome nodes like switch, level, climate sensor, etc.
 Using these minimalistic defaults applications can take 'assumptions' about the purpose of the properties used in these nodes.
 
-Each node can be configured and properties can be finetuned to specific needs.
+Each node can be configured and properties can be fine-tuned to specific needs.
 
 The following nodes are defined:
 
@@ -42,7 +42,7 @@ This library offers a set of `HomieNode`s which can either be subclassed or used
 Benefits of this library are:
 
 - properties do not have to be defined manually - faster implementation
-- node offers convenience accessors to property values with typescript types
+- node offers convenience accessors to property values with TypeScript types
 - all nodes follow a defined standard, so results are all comparable
 
 Below you find a usage example with a theoretical hardware sensor api implementing a homie device with a climate node.
@@ -427,11 +427,11 @@ const config_all = {
     settable: true,
 };
 
-// only toggle property should be settable
+// only action property should be settable
 const config_specific = {
     settable: {
         state: false,
-        toggle: true,
+        action: true,
     },
 };
 ```
