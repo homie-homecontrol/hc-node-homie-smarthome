@@ -2,15 +2,15 @@ import { from, of, timer } from "rxjs";
 import { filter, mapTo, mergeMap, switchMap, takeUntil } from "rxjs/operators";
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
 import { HOMIE_TYPE_BOOL, HOMIE_TYPE_INT, NodeAttributes } from "node-homie/model";
-import { MotionSensorhNodePropertyConfig, DefaultNoMotionIntervals, H_SMARTHOME_TYPE_MOTION_SENSOR } from "./model/Smarthome.model";
+import { MotionNodePropertyConfig, DefaultNoMotionIntervals, H_SMARTHOME_TYPE_MOTION } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
 
-const DEFAULT_OPTIONS: MotionSensorhNodePropertyConfig = { lux: true, noMotion: true, noMotionIntervals: DefaultNoMotionIntervals, settable: false }
+const DEFAULT_OPTIONS: MotionNodePropertyConfig = { lux: true, noMotion: true, noMotionIntervals: DefaultNoMotionIntervals, settable: false }
 
 
-export class MotionSensorNode extends BaseSmarthomeNode<MotionSensorhNodePropertyConfig> {
+export class MotionNode extends BaseSmarthomeNode<MotionNodePropertyConfig> {
 
     public readonly propMotion: HomieProperty;
     public set motion(value: boolean) {
@@ -42,12 +42,12 @@ export class MotionSensorNode extends BaseSmarthomeNode<MotionSensorhNodePropert
     }
 
 
-    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: MotionSensorhNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: MotionNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'motion',
                 name: 'Motion sensor',
-                type: H_SMARTHOME_TYPE_MOTION_SENSOR
+                type: H_SMARTHOME_TYPE_MOTION
             },
             ...attrs
         },

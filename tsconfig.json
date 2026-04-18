@@ -1,6 +1,8 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
     "sourceMap": true,
     "declaration": true,
     "strict": true,
@@ -11,21 +13,13 @@
     "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": [
     "./src/**/*.ts"
   ],
-  "paths": {
-    "node-homie": ["./src/index"],
-    "node-homie/homie-base": ["./src/homie-base/index"],
-    "node-homie/misc": ["./src/misc/index"],
-    "node-homie/model": ["./src/model/index"],
-    "node-homie/mqtt": ["./src/mqtt/index"],
-    "node-homie/rx": ["./src/rx/index"],
-    "node-homie/smarthome": ["./src/smarthome/index"],
-    "node-homie/util": ["./src/util/index"]
-  },
   "exclude": [
     "node_modules"
   ]

@@ -1,12 +1,12 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
 import { NodeAttributes, HOMIE_TYPE_BOOL } from "node-homie/model";
-import { TiltSensorNodePropertyConfig, H_SMARTHOME_TYPE_TILT_SENSOR } from "./model/Smarthome.model";
+import { TiltNodePropertyConfig, H_SMARTHOME_TYPE_TILT } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
-const DEFAULT_OPTIONS: TiltSensorNodePropertyConfig = { settable: false }
+const DEFAULT_OPTIONS: TiltNodePropertyConfig = { settable: false }
 
-export class TiltSensorNode extends BaseSmarthomeNode<TiltSensorNodePropertyConfig> {
+export class TiltNode extends BaseSmarthomeNode<TiltNodePropertyConfig> {
 
     public readonly propState: HomieProperty;
 
@@ -18,12 +18,12 @@ export class TiltSensorNode extends BaseSmarthomeNode<TiltSensorNodePropertyConf
         return this.propState.value === 'true';
     }
 
-    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: TiltSensorNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: TiltNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'tilt',
                 name: 'Tilt sensor',
-                type: H_SMARTHOME_TYPE_TILT_SENSOR
+                type: H_SMARTHOME_TYPE_TILT
             },
             ...attrs
         },

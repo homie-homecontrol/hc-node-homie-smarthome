@@ -1,15 +1,15 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
 import { HOMIE_TYPE_FLOAT, HOMIE_TYPE_INT,NodeAttributes } from "node-homie/model";
-import { WeatherhNodePropertyConfig, H_SMARTHOME_TYPE_WEATHER } from "./model/Smarthome.model";
+import { ClimateNodePropertyConfig, H_SMARTHOME_TYPE_CLIMATE } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
 
-const DEFAULT_OPTIONS: WeatherhNodePropertyConfig = { temperature: true, humidity: true, pressure: false, tempUnit: "C" , settable: false }
+const DEFAULT_OPTIONS: ClimateNodePropertyConfig = { temperature: true, humidity: true, pressure: false, tempUnit: "C" , settable: false }
 
 
 
-export class WeatherNode extends BaseSmarthomeNode<WeatherhNodePropertyConfig> {
+export class ClimateNode extends BaseSmarthomeNode<ClimateNodePropertyConfig> {
 
     public readonly propTemperature?: HomieProperty;
     public readonly propHumidity?: HomieProperty;
@@ -48,12 +48,12 @@ export class WeatherNode extends BaseSmarthomeNode<WeatherhNodePropertyConfig> {
     }
 
 
-    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: WeatherhNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: ClimateNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'weather',
                 name: 'Weather clima sensor',
-                type: H_SMARTHOME_TYPE_WEATHER
+                type: H_SMARTHOME_TYPE_CLIMATE
             },
             ...attrs
         },

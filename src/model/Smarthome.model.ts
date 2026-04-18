@@ -2,7 +2,8 @@ import { PropertyAttributes, HomiePropertyOptions } from "node-homie/model";
 import { BaseSmarthomeNode } from "..";
 
 
-export const H_SMARTHOME_NS_V1 = "homie-homecontrol/v1" as const;;
+export const H_SMARTHOME_NS_V1 = "homie-homecontrol/v1" as const;
+export const H_SMARTHOME_NS_V2 = "hc-smarthome/v2" as const;
 
 export type SetableProps<PROPIDS extends string> = {
     [index in PROPIDS]?: boolean;
@@ -28,7 +29,7 @@ export type GetPropIDType<T> = T extends BaseNodePropertyConfig<infer PROPIDS> ?
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_BATTERY = `${H_SMARTHOME_NS_V1}/type=battery` as const;
+export const H_SMARTHOME_TYPE_BATTERY = `${H_SMARTHOME_NS_V2}/cap/battery` as const;
 
 export const H_SMARTHOME_TYPE_BATTERY_PROPS = ['low-battery', 'battery-level'] as const;
 export type SmarthomeTypeBatteryProps = typeof H_SMARTHOME_TYPE_BATTERY_PROPS[number];
@@ -48,7 +49,7 @@ export type BatteryNodePropertyConfig = BaseNodePropertyConfig<SmarthomeTypeBatt
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_BUTTON = `${H_SMARTHOME_NS_V1}/type=button` as const;
+export const H_SMARTHOME_TYPE_BUTTON = `${H_SMARTHOME_NS_V2}/cap/button` as const;
 
 export const H_SMARTHOME_TYPE_BUTTON_PROPS = ['action'] as const;
 export type SmarthomeTypeButtonProps = typeof H_SMARTHOME_TYPE_BUTTON_PROPS[number];
@@ -62,12 +63,12 @@ export interface ButtonNodePropertyConfig extends BaseNodePropertyConfig<Smartho
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_COLORLIGHT = `${H_SMARTHOME_NS_V1}/type=colorlight` as const;
+export const H_SMARTHOME_TYPE_COLOR = `${H_SMARTHOME_NS_V2}/cap/color` as const;
 
-export const H_SMARTHOME_TYPE_COLORLIGHT_PROPS = ['color', 'color-temperature'] as const;
-export type SmarthomeTypeColorLightProps = typeof H_SMARTHOME_TYPE_COLORLIGHT_PROPS[number];
+export const H_SMARTHOME_TYPE_COLOR_PROPS = ['color', 'color-temperature'] as const;
+export type SmarthomeTypeColorProps = typeof H_SMARTHOME_TYPE_COLOR_PROPS[number];
 
-export interface ColorLightNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeColorLightProps> {
+export interface ColorNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeColorProps> {
     ctmin: number;
     ctmax: number;
     colorMode?: 'rgb' | 'hsv';
@@ -77,7 +78,7 @@ export interface ColorLightNodePropertyConfig extends BaseNodePropertyConfig<Sma
 // ============================================================================================
 
 
-export const H_SMARTHOME_TYPE_CONTACT = `${H_SMARTHOME_NS_V1}/type=contact` as const;
+export const H_SMARTHOME_TYPE_CONTACT = `${H_SMARTHOME_NS_V2}/cap/contact` as const;
 
 export const H_SMARTHOME_TYPE_CONTACT_PROPS = ['state'] as const;
 export type SmarthomeTypeContactProps = typeof H_SMARTHOME_TYPE_CONTACT_PROPS[number];
@@ -90,12 +91,12 @@ export interface ContactNodePropertyConfig extends BaseNodePropertyConfig<Smarth
 
 
 
-export const H_SMARTHOME_TYPE_DIMMER = `${H_SMARTHOME_NS_V1}/type=dimmer` as const;
+export const H_SMARTHOME_TYPE_LEVEL = `${H_SMARTHOME_NS_V2}/cap/level` as const;
 
-export const H_SMARTHOME_TYPE_DIMMER_PROPS = ['brightness', 'action'] as const;
-export type SmarthomeTypeDimmerProps = typeof H_SMARTHOME_TYPE_DIMMER_PROPS[number];
+export const H_SMARTHOME_TYPE_LEVEL_PROPS = ['brightness', 'action'] as const;
+export type SmarthomeTypeLevelProps = typeof H_SMARTHOME_TYPE_LEVEL_PROPS[number];
 
-export interface DimmerNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeDimmerProps> {
+export interface LevelNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeLevelProps> {
     step: number;
     stepToZero: boolean;
 }
@@ -106,7 +107,7 @@ export interface DimmerNodePropertyConfig extends BaseNodePropertyConfig<Smartho
 
 
 
-export const H_SMARTHOME_TYPE_SHUTTER = `${H_SMARTHOME_NS_V1}/type=shutter` as const;
+export const H_SMARTHOME_TYPE_SHUTTER = `${H_SMARTHOME_NS_V2}/cap/shutter` as const;
 
 export const H_SMARTHOME_TYPE_SHUTTER_PROPS = ['position', 'action'] as const;
 export type SmarthomeTypeShutterProps = typeof H_SMARTHOME_TYPE_SHUTTER_PROPS[number];
@@ -120,7 +121,7 @@ export interface ShutterNodePropertyConfig extends BaseNodePropertyConfig<Smarth
 
 
 
-export const H_SMARTHOME_TYPE_MAINTENANCE = `${H_SMARTHOME_NS_V1}/type=maintenance` as const;
+export const H_SMARTHOME_TYPE_MAINTENANCE = `${H_SMARTHOME_NS_V2}/cap/maintenance` as const;
 
 export const H_SMARTHOME_TYPE_MAINTENANCE_PROPS = ['low-battery', 'battery-level', 'last-update', 'reachable'] as const;
 export type SmarthomeTypeMaintenanceProps = typeof H_SMARTHOME_TYPE_MAINTENANCE_PROPS[number];
@@ -137,12 +138,12 @@ export interface MaintenanceNodePropertyConfig extends BaseNodePropertyConfig<Sm
 // ============================================================================================
 
 
-export const H_SMARTHOME_TYPE_MOTION_SENSOR = `${H_SMARTHOME_NS_V1}/type=motionsensor` as const;
+export const H_SMARTHOME_TYPE_MOTION = `${H_SMARTHOME_NS_V2}/cap/motion` as const;
 
 export const H_SMARTHOME_TYPE_MOTION_PROPS = ['motion', 'no-motion', 'lux'] as const;
 export type SmarthomeTypeMotionProps = typeof H_SMARTHOME_TYPE_MOTION_PROPS[number];
 
-export interface MotionSensorhNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeMotionProps> {
+export interface MotionNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeMotionProps> {
     lux: boolean;
     noMotion: boolean;
     noMotionIntervals: number[];
@@ -156,7 +157,7 @@ export const DefaultNoMotionIntervals = [30, 60, 120, 180, 300];
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_POWERMETER = `${H_SMARTHOME_NS_V1}/type=powermeter` as const;
+export const H_SMARTHOME_TYPE_POWERMETER = `${H_SMARTHOME_NS_V2}/cap/powermeter` as const;
 
 export const H_SMARTHOME_TYPE_POWERMETER_PROPS = ['current', 'energy-counter', 'frequency', 'power', 'voltage'] as const;
 export type SmarthomeTypePowermeterProps = typeof H_SMARTHOME_TYPE_POWERMETER_PROPS[number];
@@ -174,7 +175,7 @@ export interface PowermeterNodePropertyConfig extends BaseNodePropertyConfig<Sma
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_SWITCH = `${H_SMARTHOME_NS_V1}/type=switch` as const;
+export const H_SMARTHOME_TYPE_SWITCH = `${H_SMARTHOME_NS_V2}/cap/switch` as const;
 
 export const H_SMARTHOME_TYPE_SWITCH_PROPS = ['state', 'action'] as const;
 export type SmarthomeTypeSwitchProps = typeof H_SMARTHOME_TYPE_SWITCH_PROPS[number];
@@ -188,7 +189,7 @@ export interface SwitchNodePropertyConfig extends BaseNodePropertyConfig<Smartho
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_THERMOSTAT = `${H_SMARTHOME_NS_V1}/type=thermostat` as const;
+export const H_SMARTHOME_TYPE_THERMOSTAT = `${H_SMARTHOME_NS_V2}/cap/thermostat` as const;
 
 export const H_SMARTHOME_TYPE_THERMOSTAT_PROPS = ['set-temperature', 'valve', 'mode', 'windowopen', 'boost-state'] as const;
 export type SmarthomeTypeThermostatProps = typeof H_SMARTHOME_TYPE_THERMOSTAT_PROPS[number];
@@ -208,12 +209,12 @@ export interface ThermostatNodePropertyConfig extends BaseNodePropertyConfig<Sma
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_TILT_SENSOR = `${H_SMARTHOME_NS_V1}/type=tiltsensor` as const;
+export const H_SMARTHOME_TYPE_TILT = `${H_SMARTHOME_NS_V2}/cap/tilt` as const;
 
 export const H_SMARTHOME_TYPE_TILT_PROPS = ['state'] as const;
 export type SmarthomeTypeTiltProps = typeof H_SMARTHOME_TYPE_TILT_PROPS[number];
 
-export interface TiltSensorNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeTiltProps> {
+export interface TiltNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeTiltProps> {
 
 }
 
@@ -222,12 +223,12 @@ export interface TiltSensorNodePropertyConfig extends BaseNodePropertyConfig<Sma
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_WEATHER = `${H_SMARTHOME_NS_V1}/type=weather` as const;
+export const H_SMARTHOME_TYPE_CLIMATE = `${H_SMARTHOME_NS_V2}/cap/climate` as const;
 
-export const H_SMARTHOME_TYPE_WEATHER_PROPS = ['temperature', 'humidity', 'pressure'] as const;
-export type SmarthomeTypeWeatherProps = typeof H_SMARTHOME_TYPE_WEATHER_PROPS[number];
+export const H_SMARTHOME_TYPE_CLIMATE_PROPS = ['temperature', 'humidity', 'pressure'] as const;
+export type SmarthomeTypeClimateProps = typeof H_SMARTHOME_TYPE_CLIMATE_PROPS[number];
 
-export interface WeatherhNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeWeatherProps> {
+export interface ClimateNodePropertyConfig extends BaseNodePropertyConfig<SmarthomeTypeClimateProps> {
     temperature: boolean;
     tempUnit: "C" | "F";
     humidity: boolean;
@@ -239,7 +240,7 @@ export interface WeatherhNodePropertyConfig extends BaseNodePropertyConfig<Smart
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_TEXT = `${H_SMARTHOME_NS_V1}/type=text` as const;
+export const H_SMARTHOME_TYPE_TEXT = `${H_SMARTHOME_NS_V2}/cap/text` as const;
 
 export const H_SMARTHOME_TYPE_TEXT_PROPS = ['text'] as const;
 export type SmarthomeTypeTextProps = typeof H_SMARTHOME_TYPE_TEXT_PROPS[number];
@@ -250,7 +251,7 @@ export interface TextNodePropertyConfig extends BaseNodePropertyConfig<Smarthome
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_MEDIAPLAYER = `${H_SMARTHOME_NS_V1}/type=mediaplayer` as const;
+export const H_SMARTHOME_TYPE_MEDIAPLAYER = `${H_SMARTHOME_NS_V2}/cap/mediaplayer` as const;
 
 export const H_SMARTHOME_TYPE_MEDIAPLAYER_PROPS = ['player-action', 'media-progress', 'media-length', 'volume', 'art-url', 'play-state', 'mute', 'shuffle', 'repeat', 'title', 'subtext1', 'subtext2'] as const;
 export type SmarthomeTypeMediaplayerProps = typeof H_SMARTHOME_TYPE_MEDIAPLAYER_PROPS[number];
@@ -281,19 +282,19 @@ export interface MediaplayerPropertyConfig extends BaseNodePropertyConfig<Smarth
 
 // ============================================================================================
 
-export const H_SMARTHOME_TYPE_EXTENSTION = `${H_SMARTHOME_NS_V1}/extension/type` as const;
+export const H_SMARTHOME_TYPE_EXTENSTION = `${H_SMARTHOME_NS_V2}/extension/type` as const;
 
 // ============================================================================================
 
 
-export const SmarthomeTypes = [H_SMARTHOME_TYPE_BATTERY, H_SMARTHOME_TYPE_SWITCH, H_SMARTHOME_TYPE_CONTACT, H_SMARTHOME_TYPE_WEATHER,
-    H_SMARTHOME_TYPE_BUTTON, H_SMARTHOME_TYPE_TILT_SENSOR, H_SMARTHOME_TYPE_MOTION_SENSOR, H_SMARTHOME_TYPE_THERMOSTAT, H_SMARTHOME_TYPE_MEDIAPLAYER,
-    H_SMARTHOME_TYPE_POWERMETER, H_SMARTHOME_TYPE_MAINTENANCE, H_SMARTHOME_TYPE_DIMMER, H_SMARTHOME_TYPE_SHUTTER, H_SMARTHOME_TYPE_COLORLIGHT, H_SMARTHOME_TYPE_TEXT] as const;
+export const SmarthomeTypes = [H_SMARTHOME_TYPE_BATTERY, H_SMARTHOME_TYPE_SWITCH, H_SMARTHOME_TYPE_CONTACT, H_SMARTHOME_TYPE_CLIMATE,
+    H_SMARTHOME_TYPE_BUTTON, H_SMARTHOME_TYPE_TILT, H_SMARTHOME_TYPE_MOTION, H_SMARTHOME_TYPE_THERMOSTAT, H_SMARTHOME_TYPE_MEDIAPLAYER,
+    H_SMARTHOME_TYPE_POWERMETER, H_SMARTHOME_TYPE_MAINTENANCE, H_SMARTHOME_TYPE_LEVEL, H_SMARTHOME_TYPE_SHUTTER, H_SMARTHOME_TYPE_COLOR, H_SMARTHOME_TYPE_TEXT] as const;
 
 
 export type SmarthomeType = typeof SmarthomeTypes[number];
 
 export type SmarthomeNodePropConfig = BatteryNodePropertyConfig | SwitchNodePropertyConfig | ContactNodePropertyConfig |
-    WeatherhNodePropertyConfig | ButtonNodePropertyConfig | TiltSensorNodePropertyConfig | MotionSensorhNodePropertyConfig | MediaplayerPropertyConfig |
-    ThermostatNodePropertyConfig | PowermeterNodePropertyConfig | MaintenanceNodePropertyConfig | DimmerNodePropertyConfig | ShutterNodePropertyConfig |
-    ColorLightNodePropertyConfig | TextNodePropertyConfig;
+    ClimateNodePropertyConfig | ButtonNodePropertyConfig | TiltNodePropertyConfig | MotionNodePropertyConfig | MediaplayerPropertyConfig |
+    ThermostatNodePropertyConfig | PowermeterNodePropertyConfig | MaintenanceNodePropertyConfig | LevelNodePropertyConfig | ShutterNodePropertyConfig |
+    ColorNodePropertyConfig | TextNodePropertyConfig;

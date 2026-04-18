@@ -1,5 +1,4 @@
-import { type } from "os";
-import { pairwise, takeUntil, tap } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { HomieDevice, HomieNode, HomieProperty, } from "node-homie";
 import { NodeAttributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
 import { SwitchNodePropertyConfig, H_SMARTHOME_TYPE_SWITCH } from "./model/Smarthome.model";
