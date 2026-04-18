@@ -1,7 +1,7 @@
 import { from, of, timer } from "rxjs";
 import { filter, mapTo, mergeMap, switchMap, takeUntil } from "rxjs/operators";
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_BOOL, HOMIE_TYPE_INT, HomieNodeAtrributes } from "node-homie/model";
+import { HOMIE_TYPE_BOOL, HOMIE_TYPE_INT, NodeAttributes } from "node-homie/model";
 import { MotionSensorhNodePropertyConfig, DefaultNoMotionIntervals, H_SMARTHOME_TYPE_MOTION_SENSOR } from "./model/Smarthome.model";
 import { getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -42,7 +42,7 @@ export class MotionSensorNode extends BaseSmarthomeNode<MotionSensorhNodePropert
     }
 
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: MotionSensorhNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: MotionSensorhNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'motion',

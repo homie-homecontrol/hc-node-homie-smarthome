@@ -1,5 +1,5 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_ENUM, HomieNodeAtrributes } from "node-homie/model";
+import { HOMIE_TYPE_ENUM, NodeAttributes } from "node-homie/model";
 import { ButtonNodePropertyConfig, ButtonState, H_SMARTHOME_TYPE_BUTTON, SmarthomeTypeButtonProps } from "./model/Smarthome.model";
 import { checkSettable, getPropertyOptions } from "./util/smarthome.func";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -24,7 +24,7 @@ export class ButtonNode extends BaseSmarthomeNode<ButtonNodePropertyConfig> {
         return this.propAction.value as ButtonState;
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: ButtonNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: ButtonNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'button',

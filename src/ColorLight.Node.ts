@@ -1,5 +1,5 @@
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HomieRGBColor, HOMIE_TYPE_COLOR, HOMIE_TYPE_INT, HomieNodeAtrributes, HomieHSVColor, isHomieRGBColor } from "node-homie/model";
+import { HomieRGBColor, HOMIE_TYPE_COLOR, HOMIE_TYPE_INT, NodeAttributes, HomieHSVColor, isHomieRGBColor } from "node-homie/model";
 import { hsvColorToString, parseHSVColor, parseRGBColor, rgbColorToString } from "node-homie/util";
 import { ColorLightNodePropertyConfig, H_SMARTHOME_TYPE_COLORLIGHT } from "./model/Smarthome.model";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -30,7 +30,7 @@ export class ColorLightNode extends BaseSmarthomeNode<ColorLightNodePropertyConf
         return parseInt(this.propColorTemperature.value!, 10)
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: ColorLightNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: ColorLightNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'colorlight',

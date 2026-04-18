@@ -1,6 +1,6 @@
 import { takeUntil } from "rxjs/operators";
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_INT, HomieNodeAtrributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
+import { HOMIE_TYPE_INT, NodeAttributes, HOMIE_TYPE_BOOL, HOMIE_TYPE_ENUM } from "node-homie/model";
 import { DimmerNodePropertyConfig, H_SMARTHOME_TYPE_DIMMER } from "./model/Smarthome.model";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
@@ -21,7 +21,7 @@ export class DimmerNode extends BaseSmarthomeNode<DimmerNodePropertyConfig> {
         return this.propBrightness.value ? parseInt(this.propBrightness.value) : 0;
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: DimmerNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: DimmerNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'dimmer',

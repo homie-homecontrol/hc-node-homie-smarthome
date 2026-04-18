@@ -1,4 +1,4 @@
-import { HomiePropertyAtrributes, HomiePropertyOptions } from "node-homie/model";
+import { PropertyAttributes, HomiePropertyOptions } from "node-homie/model";
 import { BaseSmarthomeNode } from "..";
 
 
@@ -20,7 +20,7 @@ export interface BaseNodePropertyConfig<PROPIDS extends string> extends SetableN
 
 }
 
-export interface SmarthomePropAttrs<IDS extends string> extends HomiePropertyAtrributes {
+export interface SmarthomePropAttrs<IDS extends string> extends PropertyAttributes {
     id: IDS;
 }
 

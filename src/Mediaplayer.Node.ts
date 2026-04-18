@@ -1,5 +1,5 @@
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HOMIE_TYPE_FLOAT, HomieNodeAtrributes, HOMIE_TYPE_ENUM, HOMIE_TYPE_INT, HOMIE_TYPE_STRING, HOMIE_TYPE_BOOL, notNullish } from "node-homie/model";
+import { HOMIE_TYPE_FLOAT, NodeAttributes, HOMIE_TYPE_ENUM, HOMIE_TYPE_INT, HOMIE_TYPE_STRING, HOMIE_TYPE_BOOL, notNullish } from "node-homie/model";
 import { MediaplayerPropertyConfig, PlayerActions, H_SMARTHOME_TYPE_MEDIAPLAYER, MediaPlayerControlStateFormat, MediaPlayerControlState, MediaPlayerControlStates } from "./model/Smarthome.model";
 import { stringToBool } from "node-homie/util";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
@@ -147,7 +147,7 @@ export class MediaplayerNode extends BaseSmarthomeNode<MediaplayerPropertyConfig
     }
 
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: MediaplayerPropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: MediaplayerPropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'mediaplayer',

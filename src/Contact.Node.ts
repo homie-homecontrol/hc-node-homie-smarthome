@@ -1,5 +1,5 @@
 import { HomieDevice, HomieProperty } from "node-homie";
-import { HomieNodeAtrributes, HOMIE_TYPE_BOOL } from "node-homie/model";
+import { NodeAttributes, HOMIE_TYPE_BOOL } from "node-homie/model";
 import { ContactNodePropertyConfig, H_SMARTHOME_TYPE_CONTACT } from "./model/Smarthome.model";
 import { BaseSmarthomeNode } from "./BaseSmarthome.Node";
 
@@ -17,7 +17,7 @@ export class ContactNode extends BaseSmarthomeNode<ContactNodePropertyConfig> {
         return this.propState.value === 'true';
     }
 
-    constructor(device: HomieDevice, attrs: Partial<HomieNodeAtrributes> = {}, propConfig: ContactNodePropertyConfig = DEFAULT_OPTIONS) {
+    constructor(device: HomieDevice, attrs: Partial<NodeAttributes> = {}, propConfig: ContactNodePropertyConfig = DEFAULT_OPTIONS) {
         super(device, {
             ...{
                 id: 'contact',

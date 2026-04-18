@@ -1,11 +1,11 @@
 import { HomieDevice, HomieNode, HomieProperty } from "node-homie";
-import { HomieNodeAtrributes, HomiePropertyAtrributes } from "node-homie/model";
+import { NodeAttributes } from "node-homie/model";
 import { BaseNodePropertyConfig, GetPropIDType, SmarthomePropAttrs } from "./model";
 import { checkSettable, getPropertyOptions } from "./util/smarthome.func";
 
 export class BaseSmarthomeNode<P_CFG extends BaseNodePropertyConfig<PROPIDS>, PROPIDS extends string = GetPropIDType<P_CFG>> extends HomieNode {
 
-    constructor(device: HomieDevice, attrs: HomieNodeAtrributes, public readonly propConfig: P_CFG) {
+    constructor(device: HomieDevice, attrs: NodeAttributes, public readonly propConfig: P_CFG) {
         super(device, attrs);
     }
 
