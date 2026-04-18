@@ -454,8 +454,8 @@ const config = {
 
 # Breaking changes (v4 → v5)
 
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
+
 Please also note that this library does not yet fully implement the v2 homecontrol smarthome spec. Updates will follow.
 
 ## Namespace
@@ -502,4 +502,3 @@ Please also note that this library does not yet fully implement the v2 homecontr
 | `DimmerNodePropertyConfig`       | `LevelNodePropertyConfig`   |
 | `ColorLightNodePropertyConfig`   | `ColorNodePropertyConfig`   |
 | `TiltSensorNodePropertyConfig`   | `TiltNodePropertyConfig`    |
->>>>>>> aa17558 (refactor: rename v2 node classes and exports)
